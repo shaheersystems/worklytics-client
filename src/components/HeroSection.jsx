@@ -21,7 +21,7 @@ export default function HeroSection() {
           <div className='flex items-center lg:flex-1'>
             <a href='#' className=''>
               <span className='text-xl font-semibold font-serif'>
-                Worklytics.
+                WA.
               </span>
             </a>
           </div>
