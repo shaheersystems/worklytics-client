@@ -1,62 +1,9 @@
 import { useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
-const navigation = [
-  { name: "Jobs", href: "#" },
-  { name: "Companies", href: "#" },
-  { name: "Team", href: "#" },
-  { name: "Docs", href: "#" },
-];
-
 export default function HeroSection() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className='bg-white'>
-      <header className='absolute inset-x-0 top-0 z-50'>
-        <nav
-          className='flex items-center justify-between p-6 lg:px-8'
-          aria-label='Global'
-        >
-          <div className='flex items-center lg:flex-1'>
-            <a href='#' className=''>
-              <span className='text-xl font-semibold font-serif'>
-                Worklytics.
-              </span>
-            </a>
-          </div>
-          <div className='flex lg:hidden'>
-            <button
-              type='button'
-              className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <span className='sr-only'>Open main menu</span>
-              <Bars3Icon className='h-6 w-6' aria-hidden='true' />
-            </button>
-          </div>
-          <div className={`lg:flex lg:gap-x-12 hidden`}>
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className='text-sm font-semibold leading-6 text-gray-900'
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-          <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-            <a
-              href='#'
-              className='text-sm font-semibold leading-6 text-gray-900'
-            >
-              Log in <span aria-hidden='true'>&rarr;</span>
-            </a>
-          </div>
-        </nav>
-      </header>
-
       <div className='relative isolate pt-14'>
         <div
           className='absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80'
