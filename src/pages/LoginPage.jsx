@@ -24,6 +24,7 @@ export default function LoginPage() {
                   id='email'
                   name='email'
                   type='email'
+                  placeholder="Email"
                   autoComplete='email'
                   required
                   className='block w-full rounded-md px-4 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -45,6 +46,7 @@ export default function LoginPage() {
                   id='password'
                   name='password'
                   type='password'
+                  placeholder="Password"
                   autoComplete='current-password'
                   required
                   className='block w-full px-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -64,7 +66,7 @@ export default function LoginPage() {
           <p className='mt-10 text-center text-sm text-gray-500'>
             Not a member?{" "}
             <a
-              href='#'
+              href='/signup'
               className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
             >
               Sign up now
