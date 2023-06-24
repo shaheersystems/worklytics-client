@@ -1,6 +1,29 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser, setIsLoggedIn } = useAuth();
+  const [error, setError] = useState("");
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    if (!email.includes("@")) {
+      setError("Please enter a valid email");
+      return;
+    }
+    const user = {
+      email: email,
+      password: password,
+    };
+    setUser(user);
+    setIsLoggedIn(true);
+    localStorage.setItem("user", JSON.stringify(user));
+  };
+
   return (
     <>
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8'>
@@ -9,9 +32,9 @@ export default function LoginPage() {
             Log in to your account
           </h2>
         </div>
-
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
           <form className='space-y-6' action='#' method='POST'>
+            {error && <h1 className='text-red-500'>{error}</h1>}
             <div>
               <label
                 htmlFor='email'
@@ -24,10 +47,11 @@ export default function LoginPage() {
                   id='email'
                   name='email'
                   type='email'
-                  placeholder="Email"
+                  placeholder='Email'
                   autoComplete='email'
                   required
                   className='block w-full rounded-md px-4 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -43,10 +67,11 @@ export default function LoginPage() {
               </div>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
                   id='password'
                   name='password'
                   type='password'
-                  placeholder="Password"
+                  placeholder='Password'
                   autoComplete='current-password'
                   required
                   className='block w-full px-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -55,6 +80,7 @@ export default function LoginPage() {
             </div>
             <div>
               <button
+                onClick={onSubmit}
                 type='submit'
                 className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
               >
