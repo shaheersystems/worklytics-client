@@ -1,9 +1,13 @@
 import React from "react";
+import Logo from "../components/Logo";
 
 export default function SignupPage() {
   return (
     <>
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8'>
+        <div className='flex items-center justify-center'>
+          <Logo />
+        </div>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             Sign Up to create an account
@@ -24,7 +28,7 @@ export default function SignupPage() {
                   id='email'
                   name='email'
                   type='email'
-                  placeholder="Email address"
+                  placeholder='Email address'
                   autoComplete='email'
                   required
                   className='block w-full rounded-md px-4 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -46,7 +50,7 @@ export default function SignupPage() {
                   id='password'
                   name='password'
                   type='password'
-                  placeholder="Email"
+                  placeholder='Email'
                   autoComplete='current-password'
                   required
                   className='block w-full px-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -64,12 +68,12 @@ export default function SignupPage() {
           </form>
 
           <p className='mt-10 text-center text-sm text-gray-500'>
-            Having an account?{" "}
+            Already a member?{" "}
             <a
               href='/login'
               className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
             >
-              Login now
+              Log in now
             </a>
           </p>
         </div>
