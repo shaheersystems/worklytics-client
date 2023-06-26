@@ -1,9 +1,16 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Stats from "../components/Stats";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  PlusIcon,
+} from "@heroicons/react/24/outline";
 import Logo from "../components/Logo";
 import { useAuth } from "../context/AuthContext";
+import ApplicationsTable from "../components/Table";
+import CardHeading from "../components/CardHeading";
+
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -60,7 +67,15 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className='hidden sm:ml-6 sm:flex sm:items-center'>
-                    {/* Profile dropdown */}
+                    <div className='px-4'>
+                      <a
+                        href='/new'
+                        className='flex items-center gap-2 text-sm px-4 py-2 hover:bg-indigo-500 text-white bg-indigo-600 rounded-lg'
+                      >
+                        Post a new job
+                        <PlusIcon height={18} className='text-white' />
+                      </a>
+                    </div>
                     <Menu as='div' className='relative ml-3'>
                       <div>
                         <Menu.Button className='flex rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
@@ -199,18 +214,11 @@ export default function Dashboard() {
             </>
           )}
         </Disclosure>
-
         <div className='py-10'>
-          <header>
-            <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-              <h1 className='text-3xl font-bold leading-tight tracking-tight text-gray-900'>
-                Dashboard
-              </h1>
-            </div>
-          </header>
+          <CardHeading />
           <main>
             <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-              <Stats />
+              <ApplicationsTable />
             </div>
           </main>
         </div>
