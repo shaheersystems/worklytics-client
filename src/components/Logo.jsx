@@ -5,7 +5,7 @@ function Logo() {
     <a href='/' className=''>
       <span className='lg:py-4'>
         <svg
-          width='150'
+          width='120'
           height='90'
           viewBox='0 0 383 90'
           fill='none'
