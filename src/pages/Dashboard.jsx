@@ -27,7 +27,7 @@ export default function Dashboard() {
     e.preventDefault();
     setUser(null);
     setIsLoggedIn(false);
-    localStorage.setItem("user", null);
+    localStorage.removeItem("user");
   };
   return (
     <>
