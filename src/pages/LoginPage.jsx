@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
+import ErrorAlert from "../components/ErrorAlert";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +39,7 @@ export default function LoginPage() {
         </div>
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
           <form className='space-y-6' action='#' method='POST'>
-            {error && <h1 className='text-red-500'>{error}</h1>}
+            {error && <ErrorAlert error={error} />}
             <div>
               <label
                 htmlFor='email'
