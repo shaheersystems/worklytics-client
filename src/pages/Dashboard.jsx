@@ -27,18 +27,10 @@ export default function Dashboard() {
     e.preventDefault();
     setUser(null);
     setIsLoggedIn(false);
-    localStorage.setItem("user", null);
+    localStorage.removeItem("user");
   };
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className='min-h-full'>
         <Disclosure as='nav' className='bg-white shadow-sm'>
           {({ open }) => (
