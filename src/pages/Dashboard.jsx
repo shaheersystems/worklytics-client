@@ -1,226 +1,98 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
-import Logo from "../components/Logo";
-import { useAuth } from "../context/AuthContext";
-import ApplicationsTable from "../components/Table";
-import CardHeading from "../components/CardHeading";
-
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+import DashboardNavigation from "../components/DashboardNavigation";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import JobListItem from "../components/JobListItem";
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Jobs", href: "#", current: false },
-  { name: "Applications", href: "#", current: false },
+  { name: "Dashboard", href: "/dashboard", current: true },
+  { name: "Job Listing", href: "/jobs", current: false },
+  { name: "Applications", href: "/applications", current: false },
+  { name: "Questions", href: "/questions", current: false },
 ];
-const userNavigation = [{ name: "Company Profile", href: "#" }];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Dashboard() {
-  const { setUser, setIsLoggedIn } = useAuth();
-  const signoutHandle = (e) => {
-    e.preventDefault();
-    setUser(null);
-    setIsLoggedIn(false);
-    localStorage.removeItem("user");
-  };
+  const jobListing = [
+    {
+      id: 1,
+      title: "Frontend Developer",
+      description: "We are looking for a frontend developer to join our team",
+      type: "Full Time",
+      category: "Software Development",
+    },
+    {
+      id: 2,
+      title: "Backend Developer",
+      description: "We are looking for a backend developer to join our team",
+      type: "Full Time",
+      category: "Software Development",
+    },
+    {
+      id: 3,
+      title: "UI/UX Designer",
+      description: "We are looking for a UI/UX designer to join our team",
+      type: "Full Time",
+      category: "Design",
+    },
+    {
+      id: 4,
+      title: "Product Manager",
+      description: "We are looking for a product manager to join our team",
+      type: "Full Time",
+      category: "Product",
+    },
+  ];
   return (
     <>
       <div className='min-h-full'>
-        <Disclosure as='nav' className='bg-white shadow-sm'>
-          {({ open }) => (
-            <>
-              <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-                <div className='flex h-16 justify-between'>
-                  <div className='flex'>
-                    <div className='flex flex-shrink-0 items-center'>
-                      <Logo />
-                    </div>
-                    <div className='hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8'>
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "border-indigo-500 text-gray-900"
-                              : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
-                            "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='hidden sm:ml-6 sm:flex sm:items-center'>
-                    <div className='px-4'>
-                      <a
-                        href='/new'
-                        className='flex items-center gap-2 text-sm px-4 py-2 hover:bg-indigo-500 text-white bg-indigo-600 rounded-lg'
-                      >
-                        Post a new job
-                        <PlusIcon height={18} className='text-white' />
-                      </a>
-                    </div>
-                    <Menu as='div' className='relative ml-3'>
-                      <div>
-                        <Menu.Button className='flex rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                          <span className='sr-only'>Open user menu</span>
-                          <img
-                            className='h-8 w-8 rounded-lg'
-                            src='https://api.dicebear.com/6.x/shapes/svg?seed=google'
-                            alt=''
-                          />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter='transition ease-out duration-200'
-                        enterFrom='transform opacity-0 scale-95'
-                        enterTo='transform opacity-100 scale-100'
-                        leave='transition ease-in duration-75'
-                        leaveFrom='transform opacity-100 scale-100'
-                        leaveTo='transform opacity-0 scale-95'
-                      >
-                        <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  {item.name}
-                                </a>
-                              )}
-                            </Menu.Item>
-                          ))}
-                          <Menu.Item>
-                            <a
-                              onClick={signoutHandle}
-                              className={classNames(
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                              href='/'
-                            >
-                              Sign out
-                            </a>
-                          </Menu.Item>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
-                  </div>
-                  <div className='-mr-2 flex items-center sm:hidden'>
-                    {/* Mobile menu button */}
-                    <Disclosure.Button className='inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
-                      <span className='sr-only'>Open main menu</span>
-                      {open ? (
-                        <XMarkIcon
-                          className='block h-6 w-6'
-                          aria-hidden='true'
-                        />
-                      ) : (
-                        <Bars3Icon
-                          className='block h-6 w-6'
-                          aria-hidden='true'
-                        />
-                      )}
-                    </Disclosure.Button>
-                  </div>
+        <DashboardNavigation navigation={navigation} />
+        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='w-full flex items-center gap-4 flex-wrap'>
+            <Link to='/dashboard' className='flex-1'>
+              <div className=' text-white px-4 py-1 bg-indigo-400 h-20 16 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>57</h1>
+                  <p className='text-xl text-white'>Candidates to review</p>
                 </div>
+                <ChevronRightIcon height={30} />
               </div>
-              <Disclosure.Panel className='sm:hidden'>
-                <div className='space-y-1 pb-3 pt-2'>
-                  {navigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as='a'
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "border-indigo-500 bg-indigo-50 text-indigo-700"
-                          : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
-                        "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
-                      )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
+            </Link>
+            <Link to='/dashboard' className='flex-1'>
+              <div className='text-white px-4 py-1 bg-cyan-400 h-20 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>3</h1>
+                  <p className='text-xl text-white'>Opened jobs</p>
                 </div>
-                <div className='border-t border-gray-200 pb-3 pt-4'>
-                  <div className='flex items-center px-4'>
-                    <div className='flex-shrink-0'>
-                      <img
-                        className='h-10 w-10 rounded-full'
-                        src={user.imageUrl}
-                        alt=''
-                      />
-                    </div>
-                    <div className='ml-3'>
-                      <div className='text-base font-medium text-gray-800'>
-                        {user.name}
-                      </div>
-                      <div className='text-sm font-medium text-gray-500'>
-                        {user.email}
-                      </div>
-                    </div>
-                    <button
-                      type='button'
-                      className='ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-                    >
-                      <span className='sr-only'>View notifications</span>
-                      <BellIcon className='h-6 w-6' aria-hidden='true' />
-                    </button>
-                  </div>
-                  <div className='mt-3 space-y-1'>
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as='a'
-                        href={item.href}
-                        className='block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800'
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                    <Disclosure.Button
-                      className='block w-full bg-indigo-600 px-4 py-2 text-base font-medium text-white hover:bg-indigo-500 hover:text-gray-100'
-                      as='button'
-                      onClick={() => alert("hello, world")}
-                    >
-                      Sign out
-                    </Disclosure.Button>
-                  </div>
+                <ChevronRightIcon height={30} />
+              </div>
+            </Link>
+            <Link to='/dashboard' className='flex-1'>
+              <div className='flex-1 text-white px-4 py-1 bg-green-400 h-20 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>40</h1>
+                  <p className='text-xl text-white'>Questions received</p>
                 </div>
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-        <div className='py-10'>
-          <CardHeading />
-          <main>
-            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-              <ApplicationsTable />
+                <ChevronRightIcon height={30} />
+              </div>
+            </Link>
+          </div>
+        </div>
+        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='p-3 mb-4 border-b flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+              <h1 className='text-xl font-bold'>Opened Jobs</h1>
+              <span className='px-3 py-1 rounded-full bg-gray-200 font-semibold text-xs'>
+                12
+              </span>
             </div>
-          </main>
+            <div>
+              <button className='text-indigo-600 text-sm font-semibold flex items-center gap-2'>
+                View All <span aria-hidden='true'>→</span>
+              </button>
+            </div>
+          </div>
+          <div className='flex items-center justify-center gap-4 flex-wrap'>
+            {jobListing.map((job) => {
+              return <JobListItem key={job.id} {...job} />;
+            })}
+          </div>
         </div>
       </div>
     </>

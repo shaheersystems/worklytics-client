@@ -8,8 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import "./App.css";
 import NewJob from "./pages/NewJob";
+import JobLisiting from "./pages/JobListing";
 function App() {
-  // const { user, login, logout } = useAuth();
   return (
     <div className='App'>
       <Routes>
@@ -17,6 +17,7 @@ function App() {
         <Route path='/' element={<ProtectedRoutes />}>
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='new' element={<NewJob />} />
+          <Route path='jobs' element={<JobLisiting />} />
         </Route>
         <Route path='/' element={<PublicRoutes />}>
           <Route path='login' element={<LoginPage />} />
