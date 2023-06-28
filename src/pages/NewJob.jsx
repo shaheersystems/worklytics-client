@@ -9,7 +9,7 @@ const navigation = [
 function NewJob() {
   return (
     <div>
-      <DashboardNavigation navigation={navigation} />
+      {/* <DashboardNavigation navigation={navigation} /> */}
     </div>
   );
 }

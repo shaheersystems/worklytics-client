@@ -2,6 +2,7 @@ import React from "react";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
 const navigation = [
   { name: "Jobs", href: "#" },
   { name: "Companies", href: "#" },
@@ -41,12 +42,12 @@ function Header() {
           ))}
         </div>
         <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-          <a
-            href='/login'
+          <Link
+            to='/login'
             className='text-sm font-semibold leading-6 text-gray-900'
           >
             Log in <span aria-hidden='true'>&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
     </header>
