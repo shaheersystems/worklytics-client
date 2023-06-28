@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import ErrorAlert from "../components/ErrorAlert";
+import { Link } from "react-router-dom";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +33,9 @@ export default function LoginPage() {
         <div className='flex items-center justify-center'>
           <Logo />
         </div>
-        <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
+        <div className='sm:mx-auto sm:w-full sm:max-w-xl'>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-            Log in to your account
+            Log in to your Company account
           </h2>
         </div>
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
@@ -96,12 +97,12 @@ export default function LoginPage() {
 
           <p className='mt-10 text-center text-sm text-gray-500'>
             Not a member?{" "}
-            <a
-              href='/signup'
+            <Link
+              to='/signup'
               className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
             >
               Sign up now
-            </a>
+            </Link>
           </p>
         </div>
       </div>
