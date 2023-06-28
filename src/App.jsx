@@ -37,10 +37,7 @@ function App() {
         ) : (
           <Header />
         )
-        }
-      
-     
-
+        } 
       <Routes>
         <Route path="/" element={<PublicRoutes />}>
           <Route path="login" element={<LoginPage />} />
