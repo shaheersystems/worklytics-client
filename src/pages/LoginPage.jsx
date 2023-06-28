@@ -26,7 +26,6 @@ export default function LoginPage() {
     setIsLoggedIn(true);
     localStorage.setItem("user", JSON.stringify(user));
   };
-
   return (
     <>
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8'>

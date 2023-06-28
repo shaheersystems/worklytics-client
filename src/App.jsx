@@ -22,22 +22,26 @@ const navigation = [
   { name: "Applications", href: "/applications", current: false },
   { name: "Questions", href: "/questions", current: false },
 ];
-
+import SlideOver from "./components/SlideOver";
 function App() {
   const { isLoggedIn } = useAuth();
   const history = useLocation();
 
   console.log(history.pathname, "here");
-
+  const [slideOpen, setSlideOpen] = useState(false);
   return (
     <div className='App'>
       {history.pathname === "/login" || history.pathname === "/signup" ? (
         ""
       ) : isLoggedIn === true ? (
-        <DashboardNavigation navigation={navigation} />
+        <DashboardNavigation
+          navigation={navigation}
+          setSlideOpen={setSlideOpen}
+        />
       ) : (
         <Header />
       )}
+      {isLoggedIn && <SlideOver open={slideOpen} setOpen={setSlideOpen} />}
       <Routes>
         <Route path='/' element={<PublicRoutes />}>
           <Route path='login' element={<LoginPage />} />

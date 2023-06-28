@@ -1,6 +1,7 @@
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import SelectMenu from "./SelectMenu";
-
+import React, { useState } from "react";
+import ErrorAlert from "../components/ErrorAlert";
+import { useAuth } from "../context/AuthContext";
 export default function SignUpForm() {
   const locations = [
     {
@@ -85,6 +86,51 @@ export default function SignUpForm() {
     { name: "2022", id: 19 },
     { name: "2023", id: 20 },
   ];
+  const [selectedLocation, setSelectedLocation] = useState(locations[0]);
+  const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
+  const [companyName, setCompanyName] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [companyHR, setCompanyHR] = useState("");
+  const [companyYear, setCompanyYear] = useState(years[0]);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { setUser, setIsLoggedIn } = useAuth();
+  const signUpHandler = (e) => {
+    e.preventDefault();
+    if (
+      !companyName ||
+      !companyEmail ||
+      !companyWebsite ||
+      !companyHR ||
+      !password
+    ) {
+      setError("Please fill all the fields");
+      return;
+    }
+    console.log({
+      location: selectedLocation.name,
+      industry: selectedIndustry.name,
+      companyName: companyName,
+      companyEmail: companyEmail,
+      companyWebsite: companyWebsite,
+      companyHR: companyHR,
+      yearFounded: companyYear.name,
+      password: password,
+    });
+    const user = {
+      companyName: companyName,
+      companyEmail: companyEmail,
+      companyWebsite: companyWebsite,
+      companyHR: companyHR,
+      yearFounded: companyYear.name,
+      location: selectedLocation.name,
+      industry: selectedIndustry.name,
+    };
+    setUser(user); // set user
+    setIsLoggedIn(true); // set isLoggedin
+    localStorage.setItem("user", JSON.stringify(user)); // set user in localstorage
+  };
   return (
     <form>
       <div>
@@ -95,7 +141,11 @@ export default function SignUpForm() {
           <p className='mt-1 text-sm leading-6 text-gray-600'>
             Use a permanent address where you can receive mail.
           </p>
-
+          {error && (
+            <div className='py-6'>
+              <ErrorAlert error={error} />
+            </div>
+          )}
           <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
             <div className='sm:col-span-6'>
               <label
@@ -106,17 +156,24 @@ export default function SignUpForm() {
               </label>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setCompanyName(e.target.value)}
                   type='text'
                   name='company-name'
                   id='company-name'
                   autoComplete='given-name'
+                  value={companyName}
                   className='px-3 font-semibold block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                 />
               </div>
             </div>
 
             <div className='sm:col-span-6'>
-              <SelectMenu data={locations} label='Locations' />
+              <SelectMenu
+                data={locations}
+                selected={selectedLocation}
+                setSelected={setSelectedLocation}
+                label='Location'
+              />
             </div>
 
             <div className='sm:col-span-12'>
@@ -128,6 +185,8 @@ export default function SignUpForm() {
               </label>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setCompanyEmail(e.target.value)}
+                  value={companyEmail}
                   id='email'
                   name='email'
                   type='email'
@@ -145,6 +204,8 @@ export default function SignUpForm() {
               </label>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setCompanyWebsite(e.target.value)}
+                  value={companyWebsite}
                   id='website'
                   name='website'
                   type='url'
@@ -162,6 +223,8 @@ export default function SignUpForm() {
               </label>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setCompanyHR(e.target.value)}
+                  value={companyHR}
                   id='hr'
                   name='hr'
                   type='text'
@@ -171,10 +234,20 @@ export default function SignUpForm() {
               </div>
             </div>
             <div className='sm:col-span-6'>
-              <SelectMenu data={industries} label='Industries' />
+              <SelectMenu
+                data={industries}
+                selected={selectedIndustry}
+                setSelected={setSelectedIndustry}
+                label='Industries'
+              />
             </div>
             <div className='sm:col-span-6'>
-              <SelectMenu data={years} label='Year Founded' />
+              <SelectMenu
+                selected={companyYear}
+                setSelected={setCompanyYear}
+                data={years}
+                label='Year Founded'
+              />
             </div>
             <div className='sm:col-span-12'>
               <label
@@ -185,6 +258,8 @@ export default function SignUpForm() {
               </label>
               <div className='mt-2'>
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   id='password'
                   name='password'
                   type='password'
@@ -195,6 +270,7 @@ export default function SignUpForm() {
             </div>
             <div className='sm:col-span-12'>
               <button
+                onClick={signUpHandler}
                 type='submit'
                 className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
               >
