@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +8,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import faker from 'faker';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import faker from "faker";
 
 ChartJS.register(
   CategoryScale,
@@ -26,31 +26,58 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: false,
-      text: 'Chart.js Line Chart',
+      text: "Chart.js Line Chart",
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false, // Remove x-axis grid lines
+      },
+    },
+    y: {
+      grid: {
+        display: false, // Remove y-axis grid lines
+      },
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  " August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export const data = {
-  labels,
+  labels: labels.map((label, index) => label.slice(0, 3)),
   datasets: [
     {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 1)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 1)',
+      label: "Applications per month",
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
+      borderColor: "rgb(79 70 229)",
+      backgroundColor: "rgb(79 70 229)",
+      pointBackgroundColor: "transparent",
+      pointBorderColor: "transparent",
+      pointHoverBackgroundColor: "rgb(79 70 229)",
+      //
+      tension: 0.4,
+      // grid remove
+      // showLine: false,
+      // fill: false,
     },
   ],
 };

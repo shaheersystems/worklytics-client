@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,9 +7,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import faker from 'faker';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import faker from "faker";
 
 ChartJS.register(
   CategoryScale,
@@ -24,29 +24,54 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: false,
-      text: 'Chart.js Bar Chart',
+      text: "Chart.js Bar Chart",
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false, // Remove x-axis grid lines
+      },
+    },
+    y: {
+      grid: {
+        display: false, // Remove y-axis grid lines
+      },
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
+const labels = [
+  "Jan",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const getMonth = (index) => {
+  const date = new Date();
+  date.setMonth(index);
+  return date.toLocaleString("default", { month: "short" });
+};
 export const data = {
-  labels,
+  labels: labels.map((_, index) => getMonth(index)),
   datasets: [
     {
-      label: 'Dataset 1',
+      label: "Applications",
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(255, 99, 132, 1)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: 'rgba(53, 162, 235, 1)',
+      backgroundColor: "rgb(79 70 229)",
+      pointStyle: "hidden",
     },
   ],
 };
