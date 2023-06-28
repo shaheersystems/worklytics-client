@@ -1,16 +1,11 @@
-import DashboardNavigation from "../components/DashboardNavigation";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import BarChart from "../components/BarChart";
 import BarChartX from "../components/BarChartX";
 import JobListItem from "../components/JobListItem";
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: true },
-  { name: "Job Listing", href: "/jobs", current: false },
-  { name: "Applications", href: "/applications", current: false },
-  { name: "Questions", href: "/questions", current: false },
-];
-export default function Dashboard() {
+import SlideOver from "../components/SlideOver";
+import { useState } from "react";
+export default function Dashboard({ slideOpen, setSlideOpen }) {
   const jobListing = [
     {
       id: 1,

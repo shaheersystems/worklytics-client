@@ -12,14 +12,11 @@ const user = {
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-
-const userNavigation = [{ name: "Company Profile", href: "#" }];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function DashboardNavigation({ navigation }) {
+function DashboardNavigation({ navigation, setSlideOpen }) {
   const { setUser, setIsLoggedIn } = useAuth();
   const signoutHandle = (e) => {
     e.preventDefault();
@@ -27,6 +24,15 @@ function DashboardNavigation({ navigation }) {
     setIsLoggedIn(false);
     localStorage.removeItem("user");
   };
+  const userNavigation = [
+    {
+      name: "Company Profile",
+      onClick: (e) => {
+        e.preventDefault();
+        setSlideOpen(true);
+      },
+    },
+  ];
 
   const history = useLocation();
   return (
@@ -92,7 +98,8 @@ function DashboardNavigation({ navigation }) {
                         <Menu.Item key={item.name}>
                           {({ active }) => (
                             <a
-                              href={item.href}
+                              onClick={item.onClick}
+                              href='/'
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
