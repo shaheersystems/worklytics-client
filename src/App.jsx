@@ -25,30 +25,27 @@ function App() {
   const { isLoggedIn } = useAuth();
   const history = useLocation();
 
-  console.log(history.pathname, 'here');
+  console.log(history.pathname, "here");
 
   return (
-    <div className="App">
-
-
-      {
-        history.pathname === '/login' || history.pathname === '/signup' ? '' :  isLoggedIn === true ? (
-          <DashboardNavigation navigation={navigation} />
-        ) : (
-          <Header />
-        )
-        } 
+    <div className='App'>
+      {history.pathname === "/login" || history.pathname === "/signup" ? (
+        ""
+      ) : isLoggedIn === true ? (
+        <DashboardNavigation navigation={navigation} />
+      ) : (
+        <Header />
+      )}
       <Routes>
-        <Route path="/" element={<PublicRoutes />}>
-          <Route path="login" element={<LoginPage />} />
-          <Route path="signup" element={<SignupPage />} />
-          <Route path="/" element={<LandingPage />} exact />
+        <Route path='/' element={<PublicRoutes />}>
+          <Route path='login' element={<LoginPage />} />
+          <Route path='signup' element={<SignupPage />} />
+          <Route path='/' element={<LandingPage />} exact />
         </Route>
-
-        <Route path="/" element={<ProtectedRoutes />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="new" element={<NewJob />} />
-          <Route path="jobs" element={<JobListing />} />
+        <Route path='/' element={<ProtectedRoutes />}>
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='new' element={<NewJob />} />
+          <Route path='jobs' element={<JobListing />} />
         </Route>
       </Routes>
     </div>

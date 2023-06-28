@@ -43,33 +43,33 @@ export default function Dashboard() {
   ];
   return (
     <>
-      <div className="min-h-full bg-gray-50 pt-24">
-        <div className="py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="w-full flex items-center gap-4 flex-wrap">
-            <Link to="/dashboard" className="flex-1">
-              <div className=" text-white px-4 py-1 bg-indigo-400 h-20 16 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <h1 className="text-4xl font-bold text-white">57</h1>
-                  <p className="text-xl text-white">Candidates to review</p>
+      <div className='min-h-full bg-gray-50 pt-24'>
+        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='w-full flex items-center gap-4 flex-wrap'>
+            <Link to='/dashboard' className='flex-1'>
+              <div className=' text-white px-4 py-1 bg-indigo-400 h-20 16 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>57</h1>
+                  <p className='text-xl text-white'>Candidates to review</p>
                 </div>
                 <ChevronRightIcon height={30} />
               </div>
             </Link>
 
-            <Link to="/dashboard" className="flex-1">
-              <div className="text-white px-4 py-1 bg-cyan-400 h-20 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <h1 className="text-4xl font-bold text-white">3</h1>
-                  <p className="text-xl text-white">Opened jobs</p>
+            <Link to='/dashboard' className='flex-1'>
+              <div className='text-white px-4 py-1 bg-cyan-400 h-20 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>3</h1>
+                  <p className='text-xl text-white'>Opened jobs</p>
                 </div>
                 <ChevronRightIcon height={30} />
               </div>
             </Link>
-            <Link to="/dashboard" className="flex-1">
-              <div className="flex-1 text-white px-4 py-1 bg-green-400 h-20 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <h1 className="text-4xl font-bold text-white">40</h1>
-                  <p className="text-xl text-white">Questions received</p>
+            <Link to='/dashboard' className='flex-1'>
+              <div className='flex-1 text-white px-4 py-1 bg-green-400 h-20 flex items-center justify-between'>
+                <div className='flex items-center gap-4'>
+                  <h1 className='text-4xl font-bold text-white'>40</h1>
+                  <p className='text-xl text-white'>Questions received</p>
                 </div>
                 <ChevronRightIcon height={30} />
               </div>
@@ -77,81 +77,80 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="p-3 mb-4 border-b flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <h1 className="text-xl font-bold">Opened Jobs</h1>
-              <span className="px-3 py-1 rounded-full bg-gray-200 font-semibold text-xs">
+        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='p-3 mb-4 border-b flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+              <h1 className='text-xl font-bold'>Opened Jobs</h1>
+              <span className='px-3 py-1 rounded-full bg-gray-200 font-semibold text-xs'>
                 12
               </span>
             </div>
             <div>
-              <button className="text-indigo-600 text-sm font-semibold flex items-center gap-2">
-                View All <span aria-hidden="true">→</span>
+              <button className='text-indigo-600 text-sm font-semibold flex items-center gap-2'>
+                View All <span aria-hidden='true'>→</span>
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
+          <div className='flex items-center justify-center gap-4 flex-wrap'>
             {jobListing.map((job) => {
               return <JobListItem key={job.id} {...job} />;
             })}
           </div>
         </div>
-
-        <div className="grid grid-cols-2 py-24 gap-8 max-w-7xl mx-auto">
-          <div className="bg-white  rounded-md">
-            <div className="">
-              <h1 className="py-4 gap-2 flex text-lg text-gray-600 px-4 text-left border-b">
+        <div className='grid grid-cols-2 py-24 gap-8 max-w-7xl mx-auto'>
+          <div className='bg-white  rounded-md'>
+            <div className=''>
+              <h1 className='py-4 gap-2 flex text-lg font-semibold text-gray-600 px-4 text-left border-b'>
                 Apply Rate
-                <span className="text-green-500 text-sm flex items-center">
+                <span className='text-green-500 text-sm flex items-center'>
                   (40%{" "}
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-3 h-3"
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke-width='1.5'
+                    stroke='currentColor'
+                    class='w-3 h-3'
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      d='M4.5 15.75l7.5-7.5 7.5 7.5'
                     />
                   </svg>
                   )
                 </span>
               </h1>
             </div>
-            <div className="p-4">
+            <div className='p-4'>
               <BarChart />
             </div>
           </div>
-          <div className="bg-white  rounded-md">
-            <div className="">
-              <h1 className="py-4 flex  gap-2 text-lg text-gray-600 px-4 text-left border-b">
+          <div className='bg-white  rounded-md'>
+            <div className=''>
+              <h1 className='py-4 font-semibold flex  gap-2 text-lg text-gray-600 px-4 text-left border-b'>
                 Number Of Applications since last 30 days{" "}
-                <span className="text-red-500 text-sm flex items-center">
+                <span className='text-red-500 text-sm flex items-center'>
                   (20%{" "}
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
                     strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-3 h-3"
+                    stroke='currentColor'
+                    className='w-3 h-3'
                   >
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M19.5 8.25l-7.5 7.5-7.5-7.5'
                     />
                   </svg>
                   )
                 </span>
               </h1>
             </div>
-            <div className="p-4">
+            <div className='p-4'>
               <BarChartX />
             </div>
           </div>
