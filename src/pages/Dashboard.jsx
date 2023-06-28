@@ -41,8 +41,7 @@ export default function Dashboard() {
   ];
   return (
     <>
-      <div className='min-h-full'>
-        <DashboardNavigation navigation={navigation} />
+      <div className='min-h-full'> 
         <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='w-full flex items-center gap-4 flex-wrap'>
             <Link to='/dashboard' className='flex-1'>

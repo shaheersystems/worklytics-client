@@ -8,7 +8,7 @@ export const ProtectedRoutes = () => {
   console.log(location.pathname);
 
   if (!isLoggedIn) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/' />;
   }
 
   return <Outlet />;

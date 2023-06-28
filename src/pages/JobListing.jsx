@@ -11,7 +11,7 @@ const navigation = [
 function JobLisiting() {
   return (
     <div>
-      <DashboardNavigation navigation={navigation} />
+      {/* <DashboardNavigation navigation={navigation} /> */}
     </div>
   );
 }

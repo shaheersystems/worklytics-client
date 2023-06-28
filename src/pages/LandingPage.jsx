@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 function LandingPage() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <HeroSection />
       <Features />
       <CTA />

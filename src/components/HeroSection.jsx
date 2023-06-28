@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function HeroSection() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -28,18 +29,18 @@ export default function HeroSection() {
                 career with our diverse range of job openings.
               </p>
               <div className='mt-10 flex items-center justify-center gap-x-6'>
-                <a
-                  href='/signup'
+                <Link
+                  to='/signup'
                   className='rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                 >
                   Sign Up
-                </a>
-                <a
-                  href='#'
+                </Link>
+                <Link
+                  to='#'
                   className='text-sm font-semibold leading-6 text-gray-900'
                 >
                   Search Jobs <span aria-hidden='true'>→</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
