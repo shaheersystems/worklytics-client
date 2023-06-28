@@ -1,13 +1,11 @@
 import React from "react";
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 const navigation = [
-  { name: "Jobs", href: "#" },
-  { name: "Companies", href: "#" },
-  { name: "Team", href: "#" },
-  { name: "Docs", href: "#" },
+  { name: "Find Jobs", href: "/search-jobs" },
+  { name: "Browse Companies", href: "#" },
 ];
 
 function Header() {

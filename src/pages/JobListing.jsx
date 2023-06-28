@@ -1,19 +1,89 @@
-import React from "react";
-import Dashboard from "./Dashboard";
-import DashboardNavigation from "../components/DashboardNavigation";
-
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: false },
-  { name: "Job Listing", href: "/jobs", current: true },
-  { name: "Applications", href: "/applications", current: false },
-  { name: "Questions", href: "/questions", current: false },
-];
-function JobLisiting() {
+import JobListItem from "../components/JobListItem";
+import { useState } from "react";
+export default function JobListing() {
+  const jobListing = [
+    {
+      id: 1,
+      title: "Frontend Developer",
+      description: "We are looking for a frontend developer to join our team",
+      type: "Full Time",
+      category: "Software Development",
+      status: "Opened",
+    },
+    {
+      id: 2,
+      title: "Backend Developer",
+      description: "We are looking for a backend developer to join our team",
+      type: "Full Time",
+      category: "Software Development",
+      status: "Opened",
+    },
+    {
+      id: 3,
+      title: "UI/UX Designer",
+      description: "We are looking for a UI/UX designer to join our team",
+      type: "Full Time",
+      category: "Design",
+      status: "Opened",
+    },
+    {
+      id: 4,
+      title: "Product Manager",
+      description: "We are looking for a product manager to join our team",
+      type: "Full Time",
+      category: "Product",
+      status: "closed",
+    },
+    {
+      id: 5,
+      title: "Frontend Developer",
+      description: "We are looking for a frontend developer to join our team",
+      type: "Full Time",
+      category: "Software Development",
+      status: "closed",
+    },
+  ];
+  const [activeTab, setActiveTab] = useState("Opened");
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+  const tabs = [{ name: "Opened" }, { name: "Closed" }];
+  const filteredJobs = jobListing.filter(
+    (job) => job.status.toLowerCase() === activeTab.toLowerCase()
+  );
   return (
-    <div>
-      {/* <DashboardNavigation navigation={navigation} /> */}
+    <div className='max-w-[1220px] m-auto'>
+      <div className='py-10 m-auto border-gray-200 pb-5 flex-col sm:flex sm:items-start gap-6 sm:justify-between'>
+        <div className='flex items-center justify-between gap-[560px]'>
+          <h3 className='text-base font-semibold leading-6 text-gray-900'>
+            Job Listing
+          </h3>
+        </div>
+        <div className='hidden sm:block border-b w-full'>
+          <nav className='-mb-px flex space-x-8'>
+            {tabs.map((tab) => (
+              <button
+                onClick={() => setActiveTab(tab.name)}
+                key={tab.name}
+                className={classNames(
+                  activeTab === tab.name
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                  "whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
+                )}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      <div className='py-10 flex items-center  justify-center lg:justify-start gap-4 flex-wrap'>
+        {filteredJobs.map((job) => {
+          return <JobListItem key={job.id} {...job} />;
+        })}
+      </div>
     </div>
   );
 }
-
-export default JobLisiting;

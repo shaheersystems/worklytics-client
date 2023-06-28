@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Logo() {
   return (
-    <a href='/' className=''>
+    <Link to='/' className=''>
       <span className='lg:py-4'>
         <svg
           width='120'
@@ -17,7 +18,7 @@ function Logo() {
           />
         </svg>
       </span>
-    </a>
+    </Link>
   );
 }
 
