@@ -18,6 +18,7 @@ export default function Dashboard() {
       description: "We are looking for a frontend developer to join our team",
       type: "Full Time",
       category: "Software Development",
+      status: "Opened",
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ export default function Dashboard() {
       description: "We are looking for a backend developer to join our team",
       type: "Full Time",
       category: "Software Development",
+      status: "Opened",
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ export default function Dashboard() {
       description: "We are looking for a UI/UX designer to join our team",
       type: "Full Time",
       category: "Design",
+      status: "Opened",
     },
     {
       id: 4,
@@ -39,14 +42,15 @@ export default function Dashboard() {
       description: "We are looking for a product manager to join our team",
       type: "Full Time",
       category: "Product",
+      status: "closed",
     },
   ];
   return (
     <>
-      <div className='min-h-full bg-gray-50 pt-24'>
-        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+      <div className='min-h-full bg-gray-50 pt-10'>
+        <div className='py-6 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='w-full flex items-center gap-4 flex-wrap'>
-            <Link to='/dashboard' className='flex-1'>
+            <Link to='/applications' className='flex-1'>
               <div className=' text-white px-4 py-1 bg-indigo-400 h-20 16 flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
                   <h1 className='text-4xl font-bold text-white'>57</h1>
@@ -55,8 +59,7 @@ export default function Dashboard() {
                 <ChevronRightIcon height={30} />
               </div>
             </Link>
-
-            <Link to='/dashboard' className='flex-1'>
+            <Link to='/jobs' className='flex-1'>
               <div className='text-white px-4 py-1 bg-cyan-400 h-20 flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
                   <h1 className='text-4xl font-bold text-white'>3</h1>
@@ -65,7 +68,7 @@ export default function Dashboard() {
                 <ChevronRightIcon height={30} />
               </div>
             </Link>
-            <Link to='/dashboard' className='flex-1'>
+            <Link to='/questions' className='flex-1'>
               <div className='flex-1 text-white px-4 py-1 bg-green-400 h-20 flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
                   <h1 className='text-4xl font-bold text-white'>40</h1>
@@ -76,8 +79,7 @@ export default function Dashboard() {
             </Link>
           </div>
         </div>
-
-        <div className='py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='py-6 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='p-3 mb-4 border-b flex items-center justify-between'>
             <div className='flex items-center gap-3'>
               <h1 className='text-xl font-bold'>Opened Jobs</h1>
@@ -86,9 +88,12 @@ export default function Dashboard() {
               </span>
             </div>
             <div>
-              <button className='text-indigo-600 text-sm font-semibold flex items-center gap-2'>
+              <Link
+                to='/jobs'
+                className='text-indigo-600 text-sm font-semibold flex items-center gap-2'
+              >
                 View All <span aria-hidden='true'>→</span>
-              </button>
+              </Link>
             </div>
           </div>
           <div className='flex items-center justify-center gap-4 flex-wrap'>
@@ -97,8 +102,8 @@ export default function Dashboard() {
             })}
           </div>
         </div>
-        <div className='grid grid-cols-2 py-24 gap-8 max-w-7xl mx-auto'>
-          <div className='bg-white  rounded-md'>
+        <div className='grid grid-cols-2 py-8 gap-8 px-8 max-w-7xl mx-auto'>
+          <div className='bg-white rounded-md'>
             <div className=''>
               <h1 className='py-4 gap-2 flex text-lg font-semibold text-gray-600 px-4 text-left border-b'>
                 Apply Rate

@@ -13,6 +13,8 @@ import JobListing from "./pages/JobListing";
 import Header from "./components/Header";
 import DashboardNavigation from "./components/DashboardNavigation";
 import { useAuth } from "./context/AuthContext";
+import SingleJob from "./pages/SingleJob";
+import JobSearch from "./pages/JobSearch";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", current: true },
@@ -40,12 +42,14 @@ function App() {
         <Route path='/' element={<PublicRoutes />}>
           <Route path='login' element={<LoginPage />} />
           <Route path='signup' element={<SignupPage />} />
+          <Route path='search-jobs' element={<JobSearch />} />
           <Route path='/' element={<LandingPage />} exact />
         </Route>
         <Route path='/' element={<ProtectedRoutes />}>
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='new' element={<NewJob />} />
           <Route path='jobs' element={<JobListing />} />
+          <Route path='jobs/:id' element={<SingleJob />} />
         </Route>
       </Routes>
     </div>

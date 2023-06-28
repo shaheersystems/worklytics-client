@@ -61,7 +61,7 @@ function DashboardNavigation({ navigation }) {
                 <div className='px-4'>
                   <Link
                     to='/new'
-                    className='flex items-center gap-2 text-sm px-4 py-2 hover:bg-indigo-500 text-white bg-indigo-600 rounded-lg'
+                    className='flex items-center gap-2 text-sm px-4 py-2 hover:bg-indigo-500 text-white bg-indigo-600'
                   >
                     <PlusIcon height={18} className='text-white' />
                     Post a new job
@@ -69,10 +69,10 @@ function DashboardNavigation({ navigation }) {
                 </div>
                 <Menu as='div' className='relative ml-3'>
                   <div>
-                    <Menu.Button className='flex rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
+                    <Menu.Button className='flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
                       <span className='sr-only'>Open user menu</span>
                       <img
-                        className='h-8 w-8 rounded-lg'
+                        className='h-9 w-9 rounded-full'
                         src='https://api.dicebear.com/6.x/shapes/svg?seed=google'
                         alt=''
                       />
@@ -182,7 +182,7 @@ function DashboardNavigation({ navigation }) {
                 <Disclosure.Button
                   className='block w-full bg-indigo-600 px-4 py-2 text-base font-medium text-white hover:bg-indigo-500 hover:text-gray-100'
                   as='button'
-                  onClick={() => alert("hello, world")}
+                  onClick={signoutHandle}
                 >
                   Sign out
                 </Disclosure.Button>
