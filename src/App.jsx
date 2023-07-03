@@ -23,6 +23,8 @@ const navigation = [
   { name: "Questions", href: "/questions", current: false },
 ];
 import SlideOver from "./components/SlideOver";
+import ApplicationsPage from "./pages/ApplicationsPage";
+import SingleApplication from "./pages/SingleApplication";
 function App() {
   const { isLoggedIn } = useAuth();
   const history = useLocation();
@@ -54,6 +56,8 @@ function App() {
           <Route path='new' element={<NewJob />} />
           <Route path='jobs' element={<JobListing />} />
           <Route path='jobs/:id' element={<SingleJob />} />
+          <Route path='applications' element={<ApplicationsPage />} />
+          <Route path='applications/:id' element={<SingleApplication />} />
         </Route>
       </Routes>
     </div>
