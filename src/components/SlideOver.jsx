@@ -1,17 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
+import { useAuth } from "../context/AuthContext";
 export default function SlideOver({ open, setOpen }) {
-  const [companyProfile, setCompanyProfile] = useState({});
-  useEffect(() => {
-    const getCompanyProfile = async () => {
-      // GET FROM LOCAL STORAGE
-      const profile = await JSON.parse(localStorage.getItem("user"));
-      setCompanyProfile(profile);
-    };
-    getCompanyProfile();
-  }, []);
+  const { user: companyProfile } = useAuth();
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as='div' className='relative z-10' onClose={setOpen}>
