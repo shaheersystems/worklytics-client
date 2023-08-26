@@ -96,7 +96,7 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { setUser, setIsLoggedIn } = useAuth();
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault();
     if (
       !companyName ||
@@ -108,29 +108,37 @@ export default function SignUpForm() {
       setError("Please fill all the fields");
       return;
     }
-    console.log({
-      location: selectedLocation.name,
-      industry: selectedIndustry.name,
-      companyName: companyName,
-      companyEmail: companyEmail,
-      companyWebsite: companyWebsite,
-      companyHR: companyHR,
-      yearFounded: companyYear.name,
-      password: password,
-    });
-    const user = {
-      companyName: companyName,
-      companyEmail: companyEmail,
-      companyWebsite: companyWebsite,
-      companyHR: companyHR,
-      yearFounded: companyYear.name,
-      location: selectedLocation.name,
-      industry: selectedIndustry.name,
-    };
-    setUser(user); // set user
-    setIsLoggedIn(true); // set isLoggedin
-    localStorage.setItem("user", JSON.stringify(user)); // set user in localstorage
+    try {
+      console.log("Hello, world");
+      const response = await fetch("http://localhost:5000/api/company/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: companyName,
+          email: companyEmail,
+          password: password,
+          location: selectedLocation.name,
+          industry: selectedIndustry.name,
+          founded_year: companyYear.name,
+          website: companyWebsite,
+          hrName: companyHR,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Signup request failed");
+      }
+      const companyData = await response.json();
+      console.log(companyData);
+      setUser(companyData); // set user
+      localStorage.setItem("user", JSON.stringify(companyData)); // set user in localstorage
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <form>
       <div>

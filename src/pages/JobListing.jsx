@@ -1,54 +1,30 @@
 import JobListItem from "../components/JobListItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 export default function JobListing() {
-  const jobListing = [
-    {
-      id: 1,
-      title: "Frontend Developer",
-      description: "We are looking for a frontend developer to join our team",
-      type: "Full Time",
-      category: "Software Development",
-      status: "Opened",
-    },
-    {
-      id: 2,
-      title: "Backend Developer",
-      description: "We are looking for a backend developer to join our team",
-      type: "Full Time",
-      category: "Software Development",
-      status: "Opened",
-    },
-    {
-      id: 3,
-      title: "UI/UX Designer",
-      description: "We are looking for a UI/UX designer to join our team",
-      type: "Full Time",
-      category: "Design",
-      status: "Opened",
-    },
-    {
-      id: 4,
-      title: "Product Manager",
-      description: "We are looking for a product manager to join our team",
-      type: "Full Time",
-      category: "Product",
-      status: "closed",
-    },
-    {
-      id: 5,
-      title: "Frontend Developer",
-      description: "We are looking for a frontend developer to join our team",
-      type: "Full Time",
-      category: "Software Development",
-      status: "closed",
-    },
-  ];
-  const [activeTab, setActiveTab] = useState("Opened");
+  const [jobs, setJobs] = useState([]);
+  const { user } = useAuth();
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/company/jobs?company_id=${user._id.$oid}`
+        );
+        const data = await response.json();
+        setJobs(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchJobs();
+  }, []);
+  const [activeTab, setActiveTab] = useState("Open");
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-  const tabs = [{ name: "Opened" }, { name: "Closed" }];
-  const filteredJobs = jobListing.filter(
+  const tabs = [{ name: "Open" }, { name: "Close" }];
+  const filteredJobs = jobs.filter(
     (job) => job.status.toLowerCase() === activeTab.toLowerCase()
   );
   return (

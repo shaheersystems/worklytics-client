@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import { Link } from "react-router-dom";
 const navigation = [
   { name: "Find Jobs", href: "/search-jobs" },
-  { name: "Browse Companies", href: "#" },
+  { name: "Browse Companies", href: "/browse-companies" },
 ];
 
 function Header() {
@@ -30,13 +30,13 @@ function Header() {
         </div>
         <div className={`lg:flex lg:gap-x-12 hidden`}>
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className='text-sm font-semibold leading-6 text-gray-900'
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
         <div className='hidden lg:flex lg:flex-1 lg:justify-end'>

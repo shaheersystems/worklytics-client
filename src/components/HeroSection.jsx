@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function HeroSection() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
     <div className='bg-white'>
       <div className='relative isolate pt-14'>
