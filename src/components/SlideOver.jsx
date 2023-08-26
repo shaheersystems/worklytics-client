@@ -50,7 +50,7 @@ export default function SlideOver({ open, setOpen }) {
                               <div className='inline-flex overflow-hidden rounded-lg border-4 border-white'>
                                 <img
                                   className='h-24 w-24 flex-shrink-0 sm:h-40 sm:w-40 lg:h-48 lg:w-48'
-                                  src={`https://api.dicebear.com/6.x/icons/svg?seed=${companyProfile?.companyName}&color=%230000ff`}
+                                  src={`https://api.dicebear.com/6.x/icons/svg?seed=${companyProfile?.name}&color=%230000ff`}
                                   alt=''
                                 />
                               </div>
@@ -60,7 +60,7 @@ export default function SlideOver({ open, setOpen }) {
                             <div>
                               <div className='flex items-center'>
                                 <h3 className='text-xl font-bold text-gray-900 sm:text-2xl'>
-                                  {companyProfile?.companyName}
+                                  {companyProfile?.name}
                                 </h3>
                               </div>
                               <p className='text-sm text-gray-500'>
@@ -70,7 +70,7 @@ export default function SlideOver({ open, setOpen }) {
                             <div className='mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0'>
                               <a
                                 target='_blank'
-                                href={companyProfile?.companyWebsite}
+                                href={companyProfile?.website}
                                 type='button'
                                 className='inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1'
                               >
@@ -108,10 +108,7 @@ export default function SlideOver({ open, setOpen }) {
                               Website
                             </dt>
                             <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0'>
-                              {companyProfile?.companyWebsite?.slice(
-                                12,
-                                `${companyProfile?.companyWebsite.length}`
-                              )}
+                              {companyProfile?.website}
                             </dd>
                           </div>
                           <div className='sm:flex sm:px-6 sm:py-5'>
@@ -120,7 +117,7 @@ export default function SlideOver({ open, setOpen }) {
                             </dt>
                             <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0'>
                               <time dateTime='1982-06-23'>
-                                {companyProfile?.yearFounded}
+                                {companyProfile?.founded_year}
                               </time>
                             </dd>
                           </div>

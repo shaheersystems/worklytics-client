@@ -3,43 +3,41 @@ import { Link } from "react-router-dom";
 import BarChart from "../components/BarChart";
 import BarChartX from "../components/BarChartX";
 import JobListItem from "../components/JobListItem";
-import SlideOver from "../components/SlideOver";
-import { useState } from "react";
-export default function Dashboard({ slideOpen, setSlideOpen }) {
-  const jobListing = [
-    {
-      id: 1,
-      title: "Frontend Developer",
-      description: "We are looking for a frontend developer to join our team",
-      type: "Full Time",
-      category: "Software Development",
-      status: "Opened",
-    },
-    {
-      id: 2,
-      title: "Backend Developer",
-      description: "We are looking for a backend developer to join our team",
-      type: "Full Time",
-      category: "Software Development",
-      status: "Opened",
-    },
-    {
-      id: 3,
-      title: "UI/UX Designer",
-      description: "We are looking for a UI/UX designer to join our team",
-      type: "Full Time",
-      category: "Design",
-      status: "Opened",
-    },
-    {
-      id: 4,
-      title: "Product Manager",
-      description: "We are looking for a product manager to join our team",
-      type: "Full Time",
-      category: "Product",
-      status: "closed",
-    },
-  ];
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+export default function Dashboard() {
+  const { user } = useAuth();
+  const [jobs, setJobs] = useState([]);
+  const [applications, setApplications] = useState([]);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/company/jobs?company_id=${user._id.$oid}`
+        );
+        const data = await response.json();
+        setJobs(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchApplications = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/company/applications?company_id=${user._id.$oid}`
+        );
+        const data = await response.json();
+        setApplications(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchJobs();
+    fetchApplications();
+  }, []);
+
   return (
     <>
       <div className='min-h-full bg-gray-50 pt-10'>
@@ -48,7 +46,9 @@ export default function Dashboard({ slideOpen, setSlideOpen }) {
             <Link to='/applications' className='flex-1'>
               <div className=' text-white px-4 py-1 bg-indigo-400 h-20 16 flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
-                  <h1 className='text-4xl font-bold text-white'>57</h1>
+                  <h1 className='text-4xl font-bold text-white'>
+                    {applications.length}
+                  </h1>
                   <p className='text-xl text-white'>Candidates to review</p>
                 </div>
                 <ChevronRightIcon height={30} />
@@ -57,8 +57,10 @@ export default function Dashboard({ slideOpen, setSlideOpen }) {
             <Link to='/jobs' className='flex-1'>
               <div className='text-white px-4 py-1 bg-cyan-400 h-20 flex items-center justify-between'>
                 <div className='flex items-center gap-4'>
-                  <h1 className='text-4xl font-bold text-white'>3</h1>
-                  <p className='text-xl text-white'>Opened jobs</p>
+                  <h1 className='text-4xl font-bold text-white'>
+                    {jobs.length}
+                  </h1>
+                  <p className='text-xl text-white'>Open jobs</p>
                 </div>
                 <ChevronRightIcon height={30} />
               </div>
@@ -77,9 +79,9 @@ export default function Dashboard({ slideOpen, setSlideOpen }) {
         <div className='py-6 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <div className='p-3 mb-4 border-b flex items-center justify-between'>
             <div className='flex items-center gap-3'>
-              <h1 className='text-xl font-bold'>Opened Jobs</h1>
+              <h1 className='text-xl font-bold'>Open Jobs</h1>
               <span className='px-3 py-1 rounded-full bg-gray-200 font-semibold text-xs'>
-                12
+                {jobs.length}
               </span>
             </div>
             <div>
@@ -91,8 +93,8 @@ export default function Dashboard({ slideOpen, setSlideOpen }) {
               </Link>
             </div>
           </div>
-          <div className='flex items-center justify-center gap-4 flex-wrap'>
-            {jobListing.map((job) => {
+          <div className='flex items-center justify-start gap-4 flex-wrap'>
+            {jobs?.slice(0, 4).map((job) => {
               return <JobListItem key={job.id} {...job} />;
             })}
           </div>

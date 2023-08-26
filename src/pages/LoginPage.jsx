@@ -8,7 +8,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const { setUser, setIsLoggedIn } = useAuth();
   const [error, setError] = useState("");
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please fill in all fields");
@@ -18,14 +18,38 @@ export default function LoginPage() {
       setError("Please enter a valid email");
       return;
     }
-    const user = {
+    const credentials = {
       email: email,
       password: password,
     };
-    setUser(user);
-    setIsLoggedIn(true);
-    localStorage.setItem("user", JSON.stringify(user));
+    try {
+      const response = await fetch("http://localhost:5000/api/company/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login request failed");
+      }
+
+      const data = await response.json();
+      if (data?.auth) {
+        await setIsLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(data?.company));
+        setUser(data?.company);
+      } else {
+        setError("Invalid credentials");
+      }
+    } catch (error) {
+      // Handle any error that occurs during the API request
+      console.error(error);
+      setError("Invalid Credentials");
+    }
   };
+
   return (
     <>
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8'>

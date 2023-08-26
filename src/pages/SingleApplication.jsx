@@ -1,7 +1,40 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
-
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 export default function SingleApplication() {
+  const [application, setApplication] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchApplication = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/applications/${id}`
+        );
+        const data = await response.json();
+        setApplication(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchApplication();
+  }, []);
+  function changeStatus(status) {
+    fetch(`http://localhost:5000/api/application/status`, {
+      method: "PUT",
+      body: JSON.stringify({ application_id: application._id.$oid, status }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        res.json();
+        console.log(res);
+      })
+      .then(() => {
+        window.location.reload();
+      });
+  }
   return (
     <div className='max-w-[1220px] m-auto py-10'>
       <div>
@@ -20,31 +53,16 @@ export default function SingleApplication() {
                 Full name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                Margot Foster
+                {application.applicant_name}
               </dd>
             </div>
-            <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
-              <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Application for
-              </dt>
-              <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                Backend Developer
-              </dd>
-            </div>
+
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
                 Email address
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                margotfoster@example.com
-              </dd>
-            </div>
-            <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
-              <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Salary expectation
-              </dt>
-              <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                Rs. 120,000
+                {application.applicant_email}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -52,11 +70,7 @@ export default function SingleApplication() {
                 About
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-                incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-                consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-                proident. Irure nostrud pariatur mollit ad adipisicing
-                reprehenderit deserunt qui eu.
+                {application.applicant_about}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -66,11 +80,11 @@ export default function SingleApplication() {
               <dd>
                 <div className='flex items-center gap-2'>
                   <a
-                    href='https://shaheersystems.io'
+                    href={application.applicant_portfolio}
                     className='hover:text-indigo-600'
                     target='_blank'
                   >
-                    shaheersystems.io
+                    {application.applicant_portfolio?.slice(12)}
                   </a>
                 </div>
               </dd>
@@ -78,14 +92,26 @@ export default function SingleApplication() {
           </dl>
         </div>
       </div>
-      <div className='py-4 flex items-center justify-end'>
-        <div className='space-x-3'>
-          <button className='text-white px-6 py-2 rounded bg-indigo-600 hover:bg-indigo-500'>
-            Accept
-          </button>
-          <button className='px-6 py-2'>Reject</button>
+      {application?.status === "pending" ? (
+        <div className='py-4 flex items-center justify-end'>
+          <div className='space-x-3'>
+            <button
+              onClick={() => changeStatus("Accepted")}
+              className='text-white px-6 py-2 rounded bg-indigo-600 hover:bg-indigo-500'
+            >
+              Accept
+            </button>
+            <button
+              onClick={() => changeStatus("Rejected")}
+              className='px-6 py-2'
+            >
+              Reject
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

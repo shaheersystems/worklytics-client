@@ -1,31 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ApplicationsHeading from "../components/ApplicationHeading";
 import ApplicationsTable from "../components/ApplicationsTable";
-
+import { useAuth } from "../context/AuthContext";
 function ApplicationsPage() {
-  const applications = [
-    {
-      id: 1,
-      name: "Mark Wood",
-      email: "mark.wood@gmail.com",
-      status: "Pending",
-      jobTitle: "Jr. Front-end Developer",
-    },
-    {
-      id: 1,
-      name: "Brad Pit",
-      email: "brad.pit@gmail.com",
-      status: "Accepted",
-      jobTitle: "Jr. Front-end Developer",
-    },
-    {
-      id: 1,
-      name: "Edward Norton",
-      email: "ednorton@gmail.com",
-      status: "Accepted",
-      jobTitle: "Jr. Front-end Developer",
-    },
-  ];
+  const [applications, setApplications] = useState([]);
+  const { user } = useAuth();
+  useEffect(() => {
+    fetch(
+      `http://localhost:5000/api/company/applications?company_id=${user._id.$oid}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setApplications(data);
+      });
+  }, []);
   return (
     <div>
       <ApplicationsHeading />

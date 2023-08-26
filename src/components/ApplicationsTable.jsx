@@ -18,12 +18,6 @@ export default function ApplicationsTable({ applications }) {
                 </th>
                 <th
                   scope='col'
-                  className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'
-                >
-                  For Job Role
-                </th>
-                <th
-                  scope='col'
                   className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'
                 >
                   Email
@@ -41,17 +35,14 @@ export default function ApplicationsTable({ applications }) {
             </thead>
             <tbody>
               {applications?.map((application) => (
-                <tr key={application.id}>
+                <tr key={application._id.$oid}>
                   <td className='relative py-4 pr-3 text-sm font-medium text-gray-900'>
-                    {application.name}
+                    {application.applicant_name}
                     <div className='absolute bottom-0 right-full h-px w-screen bg-gray-100' />
                     <div className='absolute bottom-0 left-0 h-px w-screen bg-gray-100' />
                   </td>
-                  <td className='hidden px-3 py-4 text-sm text-gray-500 sm:table-cell'>
-                    {application.jobTitle}
-                  </td>
                   <td className='hidden px-3 py-4 text-sm text-gray-500 md:table-cell'>
-                    {application.email}
+                    {application.applicant_email}
                   </td>
                   <td className='py-3 text-sm text-gray-500'>
                     <span className='px-3 bg-indigo-50 py-1 rounded-full text-indigo-600'>
@@ -60,7 +51,7 @@ export default function ApplicationsTable({ applications }) {
                   </td>
                   <td className='relative py-4 pl-3 text-right text-sm font-medium'>
                     <Link
-                      to={`/applications/${application.id}`}
+                      to={`/applications/${application._id.$oid}`}
                       className='text-indigo-600 hover:text-indigo-900'
                     >
                       See details

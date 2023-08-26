@@ -20,11 +20,14 @@ const navigation = [
   { name: "Dashboard", href: "/dashboard", current: true },
   { name: "Job Listing", href: "/jobs", current: false },
   { name: "Applications", href: "/applications", current: false },
-  { name: "Questions", href: "/questions", current: false },
 ];
 import SlideOver from "./components/SlideOver";
 import ApplicationsPage from "./pages/ApplicationsPage";
 import SingleApplication from "./pages/SingleApplication";
+import JobDetails from "./pages/JobDetails";
+import BrowseCompanies from "./pages/BrowseCompanies";
+import Footer from "./components/Footer";
+import ApplyForJob from "./pages/ApplyForJob";
 function App() {
   const { isLoggedIn } = useAuth();
   const history = useLocation();
@@ -49,6 +52,9 @@ function App() {
           <Route path='login' element={<LoginPage />} />
           <Route path='signup' element={<SignupPage />} />
           <Route path='search-jobs' element={<JobSearch />} />
+          <Route path='search-jobs/:id' element={<JobDetails />} />
+          <Route path='search-jobs/:id/apply' element={<ApplyForJob />} />
+          <Route path='browse-companies' element={<BrowseCompanies />} />
           <Route path='/' element={<LandingPage />} exact />
         </Route>
         <Route path='/' element={<ProtectedRoutes />}>
